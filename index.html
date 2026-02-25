@@ -1,0 +1,421 @@
+<!-- newtab.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SML Weather & Climate | Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(to bottom right, #eaf6ff, #cfe9ff);
+      color: #0b3d91;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 10px 0 6px;
+      font-size: 40px;
+    }
+
+    .subtitle {
+      margin: 0 0 22px;
+      font-size: 16px;
+      color: #114b8b;
+    }
+
+    #search-container {
+      width: 100%;
+      max-width: 620px;
+      margin: 10px 0 26px;
+    }
+
+    #search-form {
+      display: flex;
+      background: white;
+      border-radius: 50px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    #search-input {
+      flex: 1;
+      padding: 16px 20px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+    }
+
+    #search-form button {
+      background: #0b3d91;
+      border: none;
+      color: white;
+      padding: 0 26px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .grid {
+      width: 100%;
+      max-width: 920px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .tile {
+      background: white;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      text-decoration: none;
+      color: #0b3d91;
+      text-align: left;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    }
+
+    .tile .top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .tile .desc {
+      font-size: 13px;
+      color: #114b8b;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .see-more-btn {
+      margin-top: 20px;
+      padding: 10px 22px;
+      background: #0b3d91;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s ease;
+    }
+
+    .see-more-btn:hover {
+      background: #072c6b;
+    }
+
+    footer {
+      margin-top: 22px;
+      font-size: 12px;
+      color: #114b8b;
+    }
+
+    /* Cards */
+    .card {
+      width: 100%;
+      max-width: 920px;
+      background: white;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      text-align: left;
+      margin: 10px 0 14px;
+      box-sizing: border-box;
+    }
+
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    /* Weather */
+    .weather-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .weather-head-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .weather-search {
+      display: flex;
+      gap: 10px;
+      margin: 10px 0 8px;
+      flex-wrap: wrap;
+    }
+
+    .weather-search input {
+      flex: 1;
+      min-width: 220px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .weather-search button,
+    .weather-head button {
+      background: #0b3d91;
+      border: none;
+      color: white;
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .weather-search button:hover,
+    .weather-head button:hover {
+      background: #072c6b;
+    }
+
+    .weather-toggle-btn {
+      width: 40px;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .unit-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 6px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    .unit-hint {
+      font-size: 12px;
+      color: #114b8b;
+      opacity: 0.9;
+    }
+
+    .unit-btns {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .unit-btn {
+      background: #0b3d91;
+      border: none;
+      color: white;
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .unit-btn:hover {
+      background: #072c6b;
+    }
+
+    .unit-btn.active {
+      background: #062458;
+    }
+
+    .weather-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .weather-item {
+      border: 1px solid #e6e6e6;
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .weather-label {
+      font-size: 12px;
+      opacity: 0.75;
+      margin-bottom: 6px;
+    }
+
+    .weather-value {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .weather-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🌍 SML</h1>
+  <p class="subtitle">Self Motivated Learning, Weather & Climate</p>
+
+  <div id="search-container">
+    <form id="search-form" action="https://www.google.com/search" method="GET" target="_blank">
+      <input type="text" name="q" placeholder="Research weather and climate..." id="search-input" required>
+      <button type="submit">🔍</button>
+    </form>
+  </div>
+
+  <section class="card">
+    <h2>Daily Climate Fact</h2>
+    <p id="dailyFact">Loading...</p>
+  </section>
+
+  <div class="grid">
+    <a class="tile" href="winter.html">
+      <div class="top">❄ Winter</div>
+      <p class="desc">Polar climates, sunlight angle, and seasonal temperature shifts.</p>
+    </a>
+
+    <a class="tile" href="tropical.html">
+      <div class="top">🌴 Tropical</div>
+      <p class="desc">Warm temperatures, humidity, and wet and dry seasons.</p>
+    </a>
+
+    <a class="tile" href="continental.html">
+      <div class="top">🌍 Continental</div>
+      <p class="desc">Large seasonal temperature differences inland.</p>
+    </a>
+
+    <a class="tile" href="dry.html">
+      <div class="top">🏜 Dry Climate</div>
+      <p class="desc">Deserts and semi-arid regions with low precipitation.</p>
+    </a>
+
+    <a class="tile hidden extra" href="drought.html">
+      <div class="top">🌵 Drought</div>
+      <p class="desc">Extended periods of low rainfall and water shortages.</p>
+    </a>
+
+    <a class="tile hidden extra" href="snow.html">
+      <div class="top">🌨 Snow</div>
+      <p class="desc">How snow forms and its environmental impact.</p>
+    </a>
+
+    <a class="tile hidden extra" href="precipitation.html">
+      <div class="top">🌧 Precipitation</div>
+      <p class="desc">Rain, snow, hail, and how moisture falls to Earth.</p>
+    </a>
+
+    <a class="tile hidden extra" href="weathertypes.html">
+      <div class="top">🌦 Weather Types</div>
+      <p class="desc">Different types of weather and what causes them.</p>
+    </a>
+
+    <a class="tile hidden extra" href="currents.html">
+      <div class="top">🌊 Currents</div>
+      <p class="desc">Ocean and atmospheric circulation systems.</p>
+    </a>
+
+    <a class="tile hidden extra" href="ozone.html">
+      <div class="top">🌐 Ozone</div>
+      <p class="desc">The ozone layer and its importance to Earth.</p>
+    </a>
+
+    <a class="tile hidden extra" href="naturaldistasters.html">
+      <div class="top">🌋 Natural Disasters</div>
+      <p class="desc">Severe natural events and how they form.</p>
+    </a>
+
+    <a class="tile hidden extra" href="references.html">
+      <div class="top">📚 References</div>
+      <p class="desc">Sources used throughout the SML project.</p>
+    </a>
+  </div>
+
+  <button id="seeMoreBtn" class="see-more-btn" type="button">See More</button>
+
+  <section class="card" id="weatherCard">
+    <div class="weather-head">
+      <h2>Weather Dashboard</h2>
+
+      <div class="weather-head-actions">
+        <button id="useLocationBtn" type="button">Use My Location</button>
+        <button id="weatherCollapseBtn" class="weather-toggle-btn" type="button" aria-expanded="true">−</button>
+      </div>
+    </div>
+
+    <div id="weatherContent">
+      <div class="unit-bar">
+        <div class="unit-hint">Temperature units</div>
+        <div class="unit-btns" role="group" aria-label="Temperature units">
+          <button id="unitC" class="unit-btn active" type="button">C</button>
+          <button id="unitF" class="unit-btn" type="button">F</button>
+          <button id="unitK" class="unit-btn" type="button">K</button>
+        </div>
+      </div>
+
+      <div class="weather-search">
+        <input id="cityInput" type="text" placeholder="Search city, example: Los Angeles">
+        <button id="citySearchBtn" type="button">Search</button>
+      </div>
+
+      <p id="weatherStatus">Choose “Use My Location” or search a city.</p>
+
+      <div id="weatherGrid" class="weather-grid hidden">
+        <div class="weather-item">
+          <div class="weather-label">Location</div>
+          <div id="wLocation" class="weather-value">-</div>
+        </div>
+
+        <div class="weather-item">
+          <div class="weather-label">Temperature</div>
+          <div id="wTemp" class="weather-value">-</div>
+        </div>
+
+        <div class="weather-item">
+          <div class="weather-label">Wind</div>
+          <div id="wWind" class="weather-value">-</div>
+        </div>
+
+        <div class="weather-item">
+          <div class="weather-label">Condition</div>
+          <div id="wCond" class="weather-value">-</div>
+        </div>
+
+        <div class="weather-item">
+          <div class="weather-label">High, Low</div>
+          <div id="wHiLo" class="weather-value">-</div>
+        </div>
+
+        <div class="weather-item">
+          <div class="weather-label">Updated</div>
+          <div id="wTime" class="weather-value">-</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>SML Weather & Climate Project</footer>
+
+  <script type="module" src="newtab.js"></script>
+</body>
+</html>
