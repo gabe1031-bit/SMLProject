@@ -1,3 +1,7 @@
-# SMLProject
+# SML Project
 
-This is the source code and editor for the project, made for a DMS assignment.
+This is the full release source code for the SML Project, under no license.
+
+# Project Installation Instructions
+
+Use the link shown here:
