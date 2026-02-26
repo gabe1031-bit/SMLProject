@@ -1,3 +1,5 @@
+![Globe logo, with SML](https://i.imgur.com/0n9tEyo.png)
+
 # SML Project
 
 This is the full release source code for the SML Project, under no license.
