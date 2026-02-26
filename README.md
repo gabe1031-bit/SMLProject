@@ -1,4 +1,4 @@
-![Globe logo, with SML](https://i.imgur.com/0n9tEyo.png)
+[![Globe logo, with SML](https://i.imgur.com/0n9tEyo.png)](https://github.com/gabe1031-bit/SMLProject/releases)
 
 # SML Project
 
