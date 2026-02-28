@@ -21,8 +21,8 @@ The website edition of this extension for this project is coming soon! Please wa
 
 The consistency in updates depends on the type of update.
 
-BETA Updates **(0.0.1)**: 2 to 4 days  - 2/26/2026 (May release earlier, depending on multiple factors.)
+BETA Updates **(0.0.1)**: 2 to 4 days  - No specific release date. (May release earlier, depending on multiple factors.)
 
 Pre-Release Updates **(0.1.0)**: 5 to 7 days  - 3/2/2026 (May release earlier, depending on multiple factors.)
 
-Release Updates **(1.0.0)**: 8 to 15 days  - 3/10/2026 (May release earlier, depending on multiple factors.)
+Release Updates **(1.0.0)**: 8 to 15 days  - 3/4/2026 (On GITHUB) (May release earlier, depending on multiple factors.)
