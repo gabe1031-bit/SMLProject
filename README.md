@@ -13,7 +13,7 @@ Use the link shown here: [https://scribehow.com/viewer/Download_SML_Extension_BE
 A Chrome Web Store link will be provided once the current edition to roll out to its final release, so the extension could be added to the Chrome Web Store in accordance with the final release. (Managed devices can **NOT** install this extension through this method.)  
 
 
-The website is now online! It is published at http://thesmlproject.dpdns.org/ .
+The website is now online! It is published at http://thesmlproject.dpdns.org/ . If the website could not be accessed at that link, try the Github Pages alternative; https://gabe1031-bit.github.io/SMLProject/ .
 
 
 # Consistency in Updates
